@@ -10,8 +10,6 @@ export const chats = pgTable('chats', {
     fileKey: text('file_key').notNull(),
 });
 
-export type DrizzleChat = typeof chats.$inferSelect;  //to export all the above objects to sidebar
-
 export const messages = pgTable('messages', {
     id: serial('id').primaryKey(),
     chatId: integer('chat_id').references(() => chats.id).notNull(),
