@@ -10,7 +10,7 @@ import { FileUpload } from "@/components/ui/FileUpload";
 export default async function Home() {
   
   const { userId } = await auth();
-  const isAuth = !!userId; {/* to check whether the user is log in or not*/}
+  const isAuth = !!userId; {/* to check whether the user is log in or not*/ }
   
   return (
     <div className="w-screen min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
