@@ -4,18 +4,18 @@ import { uploadTos3 } from '@/lib/s3'
 import { useMutation } from '@tanstack/react-query'
 import { Inbox, Loader2 } from 'lucide-react'
 import { Input } from 'postcss'
-import React from 'react'
 import  {useDropzone} from 'react-dropzone'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import React, { useState } from 'react';
 
 interface Props {
     
 }
 
 export const FileUpload = () => {
-    const {uploading, setUploading} = React.useState(false)
-    const { mutate ,isLoading} = useMutation({  //for hitting the backend api
+    const [uploading, setUploading] = React.useState(false)
+    const { mutate, isLoading } = useMutation({  //for hitting the backend api
         mutationFn: async ({
             file_key,
             file_name
@@ -28,7 +28,8 @@ export const FileUpload = () => {
                 file_key,
                 file_name,
             });
-        }
+            return response.data;
+        },
         
     })
     
@@ -55,7 +56,7 @@ export const FileUpload = () => {
                 }
                 mutate(data, {
                     onSuccess: (data)=> {
-                        console.log("data", data);
+                        toast.success(data.message)
                     },
                     onError: (error) => {
                         toast.error("Error creating Chat")
@@ -78,7 +79,7 @@ export const FileUpload = () => {
                 className: "border-dashed border-2 rounded-xl cursor-pointer bg-grey-50 py-8 flex justify-center items-center flex-col"
             })}>
                 <input {...getInputProps()} />
-                {(uploading || isLoading) ? (
+                {uploading || isLoading ? (
                     <>
                         {/* Loading state*/}
                         <Loader2 className='w-10 h-10 text-blue-500 animate-spin' />
@@ -86,7 +87,7 @@ export const FileUpload = () => {
                         Spilling tea to GPT...
                         </p>
                     </>
-                ): (
+                ) : (
  
  <>
   <Inbox className='w-10 -h-10 text-blue-500' />
