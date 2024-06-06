@@ -15,7 +15,7 @@ interface Props {
 
 export const FileUpload = () => {
     const [uploading, setUploading] = React.useState(false)
-    const { mutate, isPending } = useMutation({  //for hitting the backend api
+    const { mutate, isLoading } = useMutation({  //for hitting the backend api
         mutationFn: async ({
             file_key,
             file_name
@@ -79,7 +79,7 @@ export const FileUpload = () => {
                 className: "border-dashed border-2 rounded-xl cursor-pointer bg-grey-50 py-8 flex justify-center items-center flex-col"
             })}>
                 <input {...getInputProps()} />
-                {uploading || isPending ? (
+                {uploading || isLoading ? (
                     <>
                         {/* Loading state*/}
                         <Loader2 className='w-10 h-10 text-blue-500 animate-spin' />
