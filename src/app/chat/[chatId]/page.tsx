@@ -6,7 +6,7 @@ import { chats } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
 
 import { parse } from 'path'
-import ChatSideBar from '@/components/ui/chatSidebar'
+import ChatSideBar from '@/components/ui/ChatSideBar'
 
 
  
