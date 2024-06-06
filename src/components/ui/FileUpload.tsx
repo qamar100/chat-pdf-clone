@@ -15,7 +15,7 @@ interface Props {
 
 export const FileUpload = () => {
     const [uploading, setUploading] = React.useState(false)
-    const { mutate, isLoading } = useMutation({  //for hitting the backend api
+    const { mutate, isPending } = useMutation({  //for hitting the backend api
         mutationFn: async ({
             file_key,
             file_name
@@ -55,8 +55,9 @@ export const FileUpload = () => {
                     return;
                 }
                 mutate(data, {
-                    onSuccess: (data)=> {
-                        toast.success(data.message)
+                    onSuccess: (data) => {
+                        console.log(data)
+                        //toast.success(data.message)
                     },
                     onError: (error) => {
                         toast.error("Error creating Chat")
@@ -79,7 +80,7 @@ export const FileUpload = () => {
                 className: "border-dashed border-2 rounded-xl cursor-pointer bg-grey-50 py-8 flex justify-center items-center flex-col"
             })}>
                 <input {...getInputProps()} />
-                {uploading || isLoading ? (
+                {uploading || isPending ? (
                     <>
                         {/* Loading state*/}
                         <Loader2 className='w-10 h-10 text-blue-500 animate-spin' />
