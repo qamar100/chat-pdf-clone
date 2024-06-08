@@ -1,9 +1,10 @@
-'use client' // any components requires interactivity then we to convert into client component 
+'use client'
+// any components requires interactivity then we to convert into client component 
 
 import { uploadTos3 } from '@/lib/s3'
 import { useMutation } from '@tanstack/react-query'
 import { Inbox, Loader2 } from 'lucide-react'
-import { Input } from 'postcss'
+
 import  {useDropzone} from 'react-dropzone'
 import axios from 'axios'
 import toast from 'react-hot-toast'
@@ -15,8 +16,9 @@ interface Props {
 
 export const FileUpload = () => {
     const [uploading, setUploading] = React.useState(false)
-    const { mutate, isPending } = useMutation({  //for hitting the backend api
-        mutationFn: async ({
+    const { mutate, isPending} = useMutation({  //for hitting the backend api
+      
+        mutationFn: async ({  //this mutatefn will pass our data(filekey and filename) to the backend api create chat
             file_key,
             file_name
         }:
@@ -31,15 +33,15 @@ export const FileUpload = () => {
             return response.data;
         },
         
-    })
+    });
     
 
     const { getRootProps, getInputProps } = useDropzone({
         accept: { 'application/pdf': ['.pdf'] },  // user can only upload pdf files
         maxFiles: 1,
         onDrop: async (acceptedFiles) => { //his onDrop function allows you to perform actions with the files that the user dropped onto the drop zone. For example, you might want to display a preview of the dropped files, upload them to a server, or process them in some other way.
-            console.log(acceptedFiles); //This statement logs the array of accepted files to the console
-            const file = acceptedFiles[0]
+           // console.log(acceptedFiles); //This statement logs the array of accepted files to the console
+            const file = acceptedFiles[0];
             if (file.size > 10 * 1024 *1024) {
                 //bigger than 10 mb
                 toast.error("Please upload a smaller file")
@@ -54,10 +56,10 @@ export const FileUpload = () => {
                     alert("Something went wrong");
                     return;
                 }
-                mutate(data, {
+                mutate(data, {   //once file are uploaded to s3 will will go to the mutate function
                     onSuccess: (data) => {
-                        console.log(data)
-                        //toast.success(data.message)
+                       console.log(data)
+                     //   toast.success(data.message)
                     },
                     onError: (error) => {
                         toast.error("Error creating Chat")

@@ -10,6 +10,7 @@ export async function POST(req: Request, res: Response) {
         console.log(file_key, file_name)
         const pages = await loadS3IntoPinecone(file_key);
         return NextResponse.json({ pages});
+       // return NextResponse.json({ message: "Sucess" })
     } catch (error) {
         console.error(error);
         return NextResponse.json(
