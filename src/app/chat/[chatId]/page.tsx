@@ -7,6 +7,8 @@ import { eq } from 'drizzle-orm'
 
 import { parse } from 'path'
 import ChatSideBar from '@/components/ui/ChatSideBar'
+import PDFViewer from '@/components/ui/PDFViewe'
+import ChatComponent from '@/components/ui/ChatComponent'
 
 
  
@@ -32,18 +34,27 @@ const chatpage = async ({params: {chatId}}: Props) => {
     if (!_chats.find(chat => chat.id === parseInt(chatId))) {
         return redirect("/");
     }
+
+    const currentChat = _chats.find(chat => chat.id === parseInt(chatId))
+
     return (
         <div className='flex max-h-screen overflow-scroll'>
-            <div className='flex w-full max-h screen overflow-scroll'>
+            <div className='flex w-full max-h-screen overflow-scroll'>
                 {/*chat sidebar*/}
-                <div className=' flex-[1] max-w-xs'>
+                <div className='flex-[1] max-w-xs'>
                  <ChatSideBar chats={_chats} chatId={parseInt(chatId)}/> 
                     
                 </div>
                  {/*pdf viewer*/}
-                <div className='max-h screen p-4 overflow-scroll flex-[5]'></div>
-                 {/*chat componentr*/}
-                <div className='flex-[3] border-l-4 border-l-slate-200'></div>  
+                <div className='max-h-screen p-4 overflow-scroll flex-[5]'>
+                <PDFViewer pdf_url={currentChat?.pdfUrl || ''} />
+                
+                </div>
+
+                {/*chat componentr*/}
+                <div className='flex-[3] border-l-4 border-l-slate-200'>
+                <ChatComponent/>
+                </div>  
            </div>
         </div>
     )

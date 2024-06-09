@@ -30,11 +30,10 @@ export async function downloadFromS3(file_key: string) {
         console.log(obj.Body)
         const file_name = `/tmp/pdf-${Date.now()}.pdf`
         console.log(file_name)
-        try {
+        
             fs.writeFileSync(file_name, obj.Body as Buffer)
-        } catch (error) {
-            console.error(error)
-          }
+       
+          
         return file_name
         
     } catch (error) {
