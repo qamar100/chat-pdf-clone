@@ -25,4 +25,4 @@ export async function POST(req: Request) {
     }catch (error) {
         console.error( "OPen AI error error")
     }
-}
+}    

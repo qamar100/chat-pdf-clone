@@ -12,7 +12,7 @@ interface Props {
     chats: DrizzleChat[],
     chatId: number,
     
-    
+   
 }
 
 const ChatSideBar = ({chats, chatId}: Props) => {

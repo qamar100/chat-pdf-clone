@@ -16,7 +16,7 @@ const ChatComponent = (props:  Props) => {
        
       });
     
-
+    
 
   return (
     <div
@@ -46,9 +46,9 @@ const ChatComponent = (props:  Props) => {
           <Send className="h-4 w-4" />
         </Button>
       </div>
-    </form>
+    </form> 
   </div>
-  )
+  )   
 }
 
-export default ChatComponent
+export default ChatComponent   

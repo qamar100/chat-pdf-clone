@@ -9,12 +9,12 @@ type Props = {
 
 const MessageList = ({ messages }: Props) => {
  
-  
+     
   if (!messages) return <></>;
   return (
     <div className="flex flex-col gap-2 px-4">
       {messages.map((message) => {
-        return (
+        return (  
           <div
             key={message.id}
             className={cn("flex", {

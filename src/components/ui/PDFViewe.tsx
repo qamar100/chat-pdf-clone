@@ -9,6 +9,6 @@ const PDFViewer = ({ pdf_url }: Props) => {
       className="w-full h-full"
     ></iframe>
   );
-};
+};   
 
 export default PDFViewer;
