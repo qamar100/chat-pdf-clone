@@ -7,16 +7,28 @@ import { Button } from "./button";
 import { Send } from "lucide-react";
 import MessageList from "./MessageList";
 
-type Props = {};
+type Props = {chatId: number};
 
-const ChatComponent = (props:  Props) => {
+const ChatComponent = ({chatId}:  Props) => {
    
     const { input, handleInputChange , handleSubmit , messages } = useChat({
-        api: "/api/chat",
+      api: "/api/create-chat/chat",
+      body: {
+        chatId
+      }
        
       });
     
-    
+      React.useEffect(() => {
+        const messageContainer = document.getElementById("message-container");
+        if (messageContainer) {
+          messageContainer.scrollTo({
+            top: messageContainer.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+      }, [messages]);  
+  
 
   return (
     <div
