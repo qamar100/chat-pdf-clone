@@ -69,7 +69,7 @@ export const FileUpload = () => {
                         
                     },
                     onError: (error) => {
-                        toast.error("Error creating Chat")
+                      //  toast.error("Error creating Chat")
                         console.error(error)
                     },
                 });
