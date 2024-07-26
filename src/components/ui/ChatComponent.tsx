@@ -6,16 +6,27 @@ import {useChat} from 'ai/react' //for streaming ui for chatgpt
 import { Button } from "./button";
 import { Send } from "lucide-react";
 import MessageList from "./MessageList";
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import {Message} from 'ai'
 
 type Props = {chatId: number};
 
 const ChatComponent = ({chatId}:  Props) => {
-   
+  const { data} = useQuery({
+    queryKey: ['chat', chatId],
+    queryFn: async () => {
+      const response = await axios.post<Message[]>("/api/create-chat/get-messages", { chatId });
+      return response.data;
+    }
+    })
+
     const { input, handleInputChange , handleSubmit , messages } = useChat({
       api: "/api/create-chat/chat",
       body: {
         chatId
-      }
+      },
+      initialMessages: data || [],
        
       });
     
