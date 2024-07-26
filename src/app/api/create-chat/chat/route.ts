@@ -1,7 +1,7 @@
 import { Configuration, OpenAIApi } from 'openai-edge'
 import {OpenAIStream, StreamingTextResponse} from 'ai'
 import { eq } from 'drizzle-orm'
-import {  chats } from '@/lib/db/schema'
+import {  chats , messages as _messages } from '@/lib/db/schema'
 import {db} from '@/lib/db'
 import { NextResponse } from 'next/server'
 import { getContext } from '@/lib/context'
@@ -47,7 +47,7 @@ export async function POST(req: Request ) {
           };
       
 
-          console.log(JSON.stringify(prompt, null, 2));
+         // console.log(JSON.stringify(prompt, null, 2));
         const response = await openai.createChatCompletion({
             model: 'gpt-3.5-turbo',
             messages: [
@@ -57,9 +57,26 @@ export async function POST(req: Request ) {
             stream: true  //to create a streaming effect ie autoregressive completion
         })
 
-        const stream = OpenAIStream(response)
-        return new StreamingTextResponse(stream)
-    }catch (error) {
-        console.error( "OPen AI error error")
-    }
-}    
+        const stream = OpenAIStream(response, {
+            onStart: async () => {
+              // save user message into db
+              await db.insert(_messages).values({
+                chatId,
+                content: lastMessages.content,
+                role: "user",
+              });
+            },
+            onCompletion: async (completion) => {
+              // save ai message into db
+              await db.insert(_messages).values({
+                chatId,
+                content: completion,
+                role: "system",
+              });
+            },
+          });
+          return new StreamingTextResponse(stream);
+        } catch (error) {}
+      }
+
+console.error( "OPen AI error error")
