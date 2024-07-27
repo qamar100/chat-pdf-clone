@@ -18,7 +18,7 @@ interface Props {
 const ChatSideBar = ({chats, chatId}: Props) => {
     const [loading, setLoading] = React.useState(false);
     return (
-        <div className='w-full h-screen p-4 text-gray-200 bg-gray-900'>
+        <div className='w-full max-h-screen overflow-scroll soff p-4 text-gray-200 bg-gray-900'>
             <Link href= "/">
               
                     <Button className='w-full border-dashed border-white border'>
@@ -44,14 +44,14 @@ const ChatSideBar = ({chats, chatId}: Props) => {
             </div>
           </Link>
         ))}
-           </div>
+           {/* </div>
             <div className='absolute bottom-4 left-4'>
                 <div className='flex items-center gap-2 text-sm text-slate-500 flex-wrap'>
                     <Link href='/'>Home</Link>
                   <Link href='/'>Source</Link>
-                    {/*strip button */}
                     
-                </div>
+                    
+                </div> */}
                 
 
        </div>
