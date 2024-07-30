@@ -60,17 +60,22 @@ export const FileUpload = () => {
                     alert("Something went wrong");
                     return;
                 }
+                console.log("file upload");
                 mutate(data, {   //once file are uploaded to s3 will will go to the mutate function
                     onSuccess: ([chat_id]) => {
                         //  console.log(data)
                         toast.success("chat created")
+                        console.log(`Navigating to /chat/${chat_id}`);
                         router.push(`/chat/${chat_id}`);
+                       
                         
                         
                     },
                     onError: (error) => {
-                      //  toast.error("Error creating Chat")
+                    //    toast.error("Error creating Chat")
                         console.error(error)
+                    //    console.log("erorrrrrrrrr")
+                        
                     },
                 });
               
