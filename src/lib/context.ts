@@ -35,7 +35,7 @@ export async function getContext(query: string, fileKey: string) {
     (match) => match.score && match.score > 0.7  // less then 70% the matches will probably be irrelevant qeury
   );                                             // the score here tells the relevance between user query and the retreived context if its less than 70% then it will be filtered earlier i set it to 90% but the score of relavance i was getting was somewhere between in 80s that i was i was not getting any context
 
-  console.log("Qualifying Docs:", qualifyingDocs);
+ //console.log("Qualifying Docs:", qualifyingDocs);
 
   type Metadata = {
     text: string;
@@ -44,7 +44,7 @@ export async function getContext(query: string, fileKey: string) {
 
   let docs = qualifyingDocs.map((match) => (match.metadata as Metadata).text);
   const context = docs.join("\n").substring(0, 3000);
-  //console.log("Context:", context); // debugg
+  console.log("Context:", context); // debugg
   //console.log("Docs:", docs);
   return context;
   
