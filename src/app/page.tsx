@@ -22,11 +22,11 @@ export default async function Home() {
     }
   }
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
+    <div className="w-screen min-h-screen bg-gradient-to-r from-blue-300 to-blue-200">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
         <div className="flex flex-col items-center text-center ">
           <div className="flex items-center">
-            <h1 className="mr-3 text-5xl font-semibold"> Chat with Any Pdf</h1>
+            <h1 className="mr-3 text-5xl font-semibold"> PaperPal</h1>
             <UserButton afterSignOutUrl="/" />  {/* after sign out this will redirect them to the original base url */}
           </div>
           
@@ -39,7 +39,7 @@ export default async function Home() {
             
           </div>
           <p className="max-w-xl mt-1 text-lg text-slate-600">
-            Join millions of students, professional and researcher to instantly answer question and undestand questions with AI
+          Transform your research experience with our AI-powered companion. Instant answers, clear explanations, and effortless paper exploration - all in one place.
           </p> 
           <div className="w-full mt-4">   {/*in below line if user is signed in then file upload or sign in link */}
             {isAuth ? (<FileUpload/>) : (  
